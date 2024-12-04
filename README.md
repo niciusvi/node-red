@@ -16,7 +16,8 @@ Atualmente utilizo o home assistant como uma VM do Proxmox, este por sua vez rod
 
 ![Sem título](https://github.com/user-attachments/assets/96fc1724-933e-474d-9011-ad0faafee52e)
 
-Configurações: 
+**Configurações: **
+
 Intel Celeron N5095 | 8GB DDR4 | 240GB SSD | Dual Gigabit LAN
 
 Excelente opção para quem precisa de um roteador/firewall com baixissimo consumo de energia.
@@ -25,30 +26,33 @@ Obs: É possível fazer upgrade apenas no armazenamento.
 
 Atualmente é possível encontrar versões atualizadas com o Intel N100.
 
-Sonoff ZBDongle Plus:
+**Sonoff ZBDongle Plus:**
 
 ![Sem título](https://github.com/user-attachments/assets/53117bd2-f1ab-4555-a893-aa9f489b4e87)
 
 
 # Software
 
-VMs: 
+**VMs:**
 
 Sophos Firewall - 4 Cores - 4GB RAM
 
 Home Assistant - 4 Cores - 4GB RAM
 
-Containers:
+**Containers:**
 
 Pi-Hole - 256MB RAM
 
 Cloudflared LXC - 256MB Ram
 
-Home Assistant Add-ons:
+**Home Assistant Add-ons:**
 
 Node-RED
+
 ESPHome Device Compiler
+
 Zigbee2MQTT
+
 Studio Code Server
 
 # Dispositivos
