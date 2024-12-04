@@ -16,7 +16,7 @@ Atualmente utilizo o home assistant como uma VM do Proxmox, este por sua vez rod
 
 ![Sem título](https://github.com/user-attachments/assets/96fc1724-933e-474d-9011-ad0faafee52e)
 
-**Configurações: **
+**Configurações:**
 
 Intel Celeron N5095 | 8GB DDR4 | 240GB SSD | Dual Gigabit LAN
 
