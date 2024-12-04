@@ -34,10 +34,12 @@ Sonoff ZBDongle Plus:
 
 VMs: 
 Sophos Firewall - 4 Cores - 4GB RAM
+
 Home Assistant - 4 Cores - 4GB RAM
 
 Containers:
 Pi-Hole - 256MB RAM
+
 Cloudflared LXC - 256MB Ram
 
 Home Assistant Add-ons:
