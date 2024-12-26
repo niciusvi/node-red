@@ -1,8 +1,8 @@
-# Node-RED Flow to send a notification of how much time was spend in the shower
+# Node-RED Flow for TTS of time in the shower
 
-## Information about the Node-RED Flow
+This Node-RED flow was developed to manage a heater's power status using an zigbee outlet, with that we can see when the heater started and provide notifications via Alexa of how much time was spend in the shower when the heater goes off.
 
-This Node-RED flow was developed to manage a heater's power status and provide notifications via Alexa when the heater is on for a certain period.
+Here in my country is rare to use boiler/tank heater, the one I use its a tankless propane heater that consumes around ~30 Watts of energy (probably because of the exhaust motor), so I don't know if it will work on boiler ones.
 
 ## Flow
 
@@ -19,59 +19,65 @@ This Node-RED flow was developed to manage a heater's power status and provide n
    - **Node Type**: `server-state-changed`
    - **Description**: Monitors the state of the heater power (`sensor.aquecedor_power`). When the power state changes and remains for 30 seconds, the flow is triggered.
 
-### 2. **Command - Start**
-   - **Node Type**: `change`
-   - **Description**: Sets the command to "start".
-
-### 3. **Power State Check**
+### 2. **Power State Check**
    - **Node Type**: `switch`
    - **Description**: Checks if the power state is greater than or equal to 10 or exactly 0.0.
 
-### 4. **Command - Stop**
+### 3. **Command - Reset**
    - **Node Type**: `change`
-   - **Description**: Sets the command to "stop".
+   - **Description**: If the power is greater or equal to 10: `Send a command to reset the hourglass node back to 0 minutes.`
 
-### 5. **Hourglass Timer**
+### 4. **Command - Start**
+   - **Node Type**: `change`
+   - **Description**: If the power is greater or equal to 10: `Send a command to start the timer in the hourglass node.`
+
+### 5. **Delay**
+   - **Node Type**: `delay`
+   - **Description**: Introduces a delay before sending the start command so the "reset" can reach the hourglass node before.
+
+### 6. **Command - Stop**
+   - **Node Type**: `change`
+   - **Description**: If the power is equal to 0.0: `Send a command to stop the time in the hourglass node.`
+
+### 7. **Hourglass Timer**
    - **Node Type**: `hourglass`
    - **Description**: Keeps track of the elapsed time since the heater was turned on.
 
-### 6. **Command - Status**
+### 8. **Command - Status**
    - **Node Type**: `change`
-   - **Description**: Sets the command to "status".
+   - **Description**: If the power is equal to 0.0: `Send the command "status" to hourglass so it can output the value.`
 
-### 7. **Delay**
+### 9. **Delay**
    - **Node Type**: `delay`
-   - **Description**: Introduces a delay before checking the status again.
+   - **Description**: Introduces a delay before sending the status command so the "stop" can reach the hourglass node before.
 
-### 8. **Command - Reset**
-   - **Node Type**: `change`
-   - **Description**: Sets the command to "reset".
-
-### 9. **Convert Payload**
+### 10. **Convert Payload**
    - **Node Type**: `function`
-   - **Description**: Converts the payload to include a message about the duration the heater has been on.
+   - **Description**: Converts the payload to include a message about the duration of the shower.
+   - **Mode**: `On Message`
+   - **Function**:
+     `msg.payload = "Your shower lasted, " + msg.elapsed.human;
+      return msg;`
 
-### 10. **Alexa Notification**
+### 11. **Alexa Notification**
    - **Node Type**: `alexa-remote-routine`
    - **Description**: Sends a TTS (Text-To-Speech) notification via Alexa devices.
 
 ## How It Works
 
-1. When the heater power (`sensor.aquecedor_power`) is monitored and the state remains for 30 seconds, the flow is triggered.
-2. The command is set to "start".
-3. The power state is checked:
-   - If the power is greater than or equal to 10, the command is set to "start", and a delay is introduced before resetting the hourglass timer.
-   - If the power is exactly 0.0, the command is set to "stop", and the hourglass timer starts tracking the duration.
-4. The status of the heater is checked periodically, introducing a delay between checks.
-5. The payload is converted to include a message about how long the heater has been on.
-6. Alexa sends a TTS notification via connected devices.
+1. The heater power (`sensor.aquecedor_power`) is monitored and if the state remains over 10 Watts for 30 seconds, the flow is triggered.
+2.  The power state is checked:
+   - If the power is greater than or equal to 10, a "Reset" command is sent to hourglass node so it can forget the previously value, a "start" is sent after 2 seconds delay so hourglass timer can start tracking the duration.
+     
+   - If the power is exactly 0.0, a "stop" command is sent to stop the hourglass, and then, after a 2 seconds delay a "status" is sent so it can output the value as the msg.payload
+3. The payload is converted to include a message about how long the heater has been on.
+4. Alexa sends a TTS notification via connected devices.
 
 ## Requirements
 
 - **Node-RED**: Ensure Node-RED is installed and configured.
 - **Home Assistant**: Home Assistant should be set up and integrated with Node-RED.
-- **Devices and Entities**: Have the following entities configured in Home Assistant:
-  - `sensor.aquecedor_power`
+- **Devices and Entities**: Smart outlet with power meetering and a heater that consumes power when you open the shower valve.
 - **Alexa Devices**: Alexa devices configured with Node-RED through the `alexa-remote` add-on.
 - **Hourglass Node**: The Hourglass node can be obtained here: [Hourglass Node](https://flows.nodered.org/node/node-red-contrib-hourglass/in/a4YHjoqP9_00).
 
