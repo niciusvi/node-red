@@ -2,7 +2,7 @@
 
 This Node-RED flow was developed to manage a heater's power status using an zigbee outlet, with that we can see when the heater started and provide notifications via Alexa of how much time was spend in the shower when the heater goes off.
 
-Here in my country is rare to use boiler/tank heater, the one I use its a tankless propane heater that consumes around ~30 Watts of energy (probably because of the exhaust motor), so I don't know if it will work on boiler ones.
+Here in my country is rare to use boiler/tank heaters, the one I use its a tankless propane heater that consumes around ~30 Watts of energy (probably because of the exhaust motor), so I don't know if it will work on boiler ones.
 
 ## Flow
 
