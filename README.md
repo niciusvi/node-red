@@ -68,7 +68,7 @@ Used for Zigbee communication.
 
 ![Sem título-1](https://github.com/user-attachments/assets/a616ed4d-71ab-4128-8063-b826f3ce7750)
 
-- Mini Interruptor WHD02 (Kitchen, Laundry, Bedroom)
+- Mini Interruptor WHD02 (Doorbell siren, Laundry, Bedroom)
 
 ![Sem título](https://github.com/user-attachments/assets/bc4c257c-8a08-4208-8583-3fb3eba3c32d)
 
@@ -90,7 +90,7 @@ Used for Zigbee communication.
 
 ![Sem título](https://github.com/user-attachments/assets/53bbb7dc-cf26-403a-8be1-0d89bbe5c08f)
 
-- Sensor de porta NovaDigital Wifi (Entrance)
+- NovaDigital Wifi Door sensor (Entrance)
 
 ![Sem título](https://github.com/user-attachments/assets/3bcfa1e4-ef86-4ffa-a7b7-d73baeb06dac)
 
