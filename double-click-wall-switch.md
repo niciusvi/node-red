@@ -4,7 +4,7 @@ This Node-RED flow was developed to control a CCT or RGB light strip. So I can c
 
 The goal is to make the LED strip toggle between On/Off and switch between warm and cool white based on the number of clicks.
 
-The only problem I faced with this flow is a small delay between a single press and the light turn On/Off, I have tried several values on the trigger that wait to see if another click will come, but I couldn't notice any difference.
+The only problem I faced with this flow is a small delay between a single press and the light turn On/Off, I have tried several values on the trigger, but I couldn't notice any difference.
 
 ## Flow
 
