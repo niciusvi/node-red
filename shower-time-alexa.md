@@ -33,7 +33,7 @@ Here in my country is rare to use boiler/tank heaters, the one I use its a tankl
 
 ### 5. **Delay**
    - **Node Type**: `delay`
-   - **Description**: Introduces a delay before sending the start command so the "reset" can reach the hourglass node before.
+   - **Description**: Introduces a delay before sending the `start` command so the `reset` can reach the hourglass node before.
 
 ### 6. **Command - Stop**
    - **Node Type**: `change`
@@ -49,7 +49,7 @@ Here in my country is rare to use boiler/tank heaters, the one I use its a tankl
 
 ### 9. **Delay**
    - **Node Type**: `delay`
-   - **Description**: Introduces a delay before sending the status command so the "stop" can reach the hourglass node before.
+   - **Description**: Introduces a delay before sending the `status` command so the `stop` can reach the hourglass node before.
 
 ### 10. **Convert Payload**
    - **Node Type**: `function`
