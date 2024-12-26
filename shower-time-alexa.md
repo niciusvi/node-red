@@ -67,9 +67,9 @@ Here in my country is rare to use boiler/tank heaters, the one I use its a tankl
 
 1. The heater power (`sensor.aquecedor_power`) is monitored and if the state remains over 10 Watts for 30 seconds, the flow is triggered.
 2.  The power state is checked:
-   - If the power is greater than or equal to 10, a "Reset" command is sent to hourglass node so it can forget the previously value, a "start" is sent after 2 seconds delay so hourglass timer can start tracking the duration.
+   - If the power is greater than or equal to 10, a `Reset command` is sent to hourglass node so it can forget the previously value, a `start` is sent after 2 seconds delay so hourglass timer can start tracking the duration.
      
-   - If the power is exactly 0.0, a "stop" command is sent to stop the hourglass, and then, after a 2 seconds delay a "status" is sent so it can output the value as the msg.payload
+   - If the power is exactly 0.0, a `stop command` is sent to stop the hourglass, and then, after a 2 seconds delay a `status` is sent so it can output the value as the msg.payload
 3. The payload is converted to include a message about how long the heater has been on.
 4. Alexa sends a TTS notification via connected devices.
 
