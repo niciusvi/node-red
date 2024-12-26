@@ -32,12 +32,14 @@ The only problem I faced with this flow is a small delay between a single press 
 ### 4. **Delay Adjustment**
    - **Node Type**: `change`
    - **Description**: Adjusts the `delay` value based on the counter. If `delay` is 1, it adjusts to 1000. If `delay` is 2, it adjusts to 1.
-   - (I need to do some tests on this node, I believe its possible to reduce the delay between single click and the action here.)
+
+(I need to do some tests on this node, I believe its possible to reduce the delay between single click and the action here.)
 
 ### 5. **Trigger**
    - **Node Type**: `trigger`
    - **Description**: Sets an interval of 0.1 milliseconds between messages for the next node.
-   - (This trigger will act as an "wait until" function, so the flow can see if you will press once or twice the button and act after this time. I tried with 1 second and 500 miliseconds and no difference was noted.)
+
+(This trigger will act as an "wait until" function, so the flow can see if you will press once or twice the button and act after this time. I tried with 1 second and 500 miliseconds and no difference was noted.)
 
 ### 6. **Output Control**
    - **Node Type**: `switch`
