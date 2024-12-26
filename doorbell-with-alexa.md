@@ -17,7 +17,8 @@ This flow was developed in Node-RED, allowing Alexa to notify when someone rings
    - **Description**: Detects when the doorbell switch is triggered in Home Assistant.
    - **Node Type**: `server-state-changed`
    - **Action**: When the state of the switch (`switch.doorbell`) changes to `off`, the flow is triggered.
-     (Here, I used the inverse off/on function, this way the LED on the switch stays on, making it easier for people to see.)
+
+(Here, I used the inverse off/on function, this way the LED on the switch stays on, making it easier for people to see.)
 
 ### 2. **Delay**
    - **Description**: Introduces a small delay and then returns the switch to its previous state.
@@ -39,7 +40,8 @@ This flow was developed in Node-RED, allowing Alexa to notify when someone rings
    - **Description**: This node is only needed if you want to change the default state of the switch to `off` to keep the led on.
    - **Node Type**: `change`
    - **Action**: If the msg.payload is (`off`), change it to (`on`).
-     (I will do some test to see if this node is really necessary)
+
+(I will do some test to see if this node is really necessary)
      
 ### 6. **Door State Check**
    - **Description**: If someone open the door it will send a message so the rate limiter can't pass new ones.
