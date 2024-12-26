@@ -1,6 +1,9 @@
-# Node-RED Flow for using a simple wall switch with only On/Off function as a On/Off & Double-Click switch.
+# Node-RED Flow for adding Double-Click function to a switch.
 
-This Node-RED flow was developed to control a CCT or RGB light strip. The LED can toggle between states and switch between warm white and cool white based on the number of clicks.
+This Node-RED flow was developed to control a CCT or RGB light strip. The proposal was to change the stip between warm and cool white with the same button I use to turn it on/off. 
+The LED can toggle between On/Off and switch between warm white and cool white based on the number of clicks.
+
+The only problem I faced with this flow is a small delay between a single press and the light turn On/Off, I have tried several values on the trigger that wait to see if another click will come, but I couldn't notice any difference.
 
 ## Flow
 
@@ -15,7 +18,7 @@ This Node-RED flow was developed to control a CCT or RGB light strip. The LED ca
 
 ### 1. **Office Switch**
    - **Node Type**: `server-state-changed`
-   - **Description**: Monitors the state of the switch (`switch.interruptor_escritorio_l3`). When the state changes, it sends a message with the payload `press`.
+   - **Description**: Monitors the state of the switch (`switch.office_switch_l3`). When the state changes, it sends a message with the payload `press`.
 
 ### 2. **Click Counter**
    - **Node Type**: `counter`
@@ -28,10 +31,12 @@ This Node-RED flow was developed to control a CCT or RGB light strip. The LED ca
 ### 4. **Delay Adjustment**
    - **Node Type**: `change`
    - **Description**: Adjusts the `delay` value based on the counter. If `delay` is 1, it adjusts to 1000. If `delay` is 2, it adjusts to 1.
+(I need to do some tests on this node, I believe its possible to reduce the delay between single click and the action here.)
 
 ### 5. **Trigger**
    - **Node Type**: `trigger`
    - **Description**: Sets an interval of 0.1 milliseconds between messages for the next node.
+(This trigger will act as an "wait until" function, so the flow can see if you will press once or twice the button and act after this time. I tried with 1 second and 500 miliseconds and no difference was noted.)
 
 ### 6. **Output Control**
    - **Node Type**: `switch`
@@ -39,19 +44,40 @@ This Node-RED flow was developed to control a CCT or RGB light strip. The LED ca
      - 1 click: `Office LED - Toggle`
      - 2 clicks: `Alternate Output`
 
-### 7. **Alternate Output**
-   - **Node Type**: `function`
-   - **Description**: Alternates between "warm white" and "cool white" with each double click.
-
-### 8. **Office LED - Toggle**
+### 7. **Office LED - Toggle**
    - **Node Type**: `api-call-service`
    - **Description**: Toggles the state of the office LED.
 
-### 9. **Office LED - Warm White**
+### 8. **Reset**
+   - **Node Type**: `change`
+   - **Description**: This node will reset the count of clicks.
+
+### 9. **Alternate Output**
+   - **Node Type**: `function`
+   - **Description**: Alternates between "warm white" and "cool white" with each double click.
+   - **Mode**: On Message
+   - **Function**:
+    `if (msg.payload === "press") {
+    // Obter ou inicializar o contador
+    flow.count = (flow.count || 0) + 1;
+    if (flow.count === 1) {
+        // Enviar para a primeira saída
+        return [msg, null];
+    } else if (flow.count === 2) {
+        // Enviar para a segunda saída e resetar o contador
+        flow.count = 0;
+        return [null, msg];
+    }
+    }
+       // Se o payload não for "press", ignore
+    return null;`
+
+
+### 10. **Office LED - Warm White**
    - **Node Type**: `api-call-service`
    - **Description**: Sets the office LED to `warm white`.
 
-### 10. **Office LED - Cool White**
+### 11. **Office LED - Cool White**
    - **Node Type**: `api-call-service`
    - **Description**: Sets the office LED to `cool white`.
 
