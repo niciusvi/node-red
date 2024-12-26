@@ -1,6 +1,6 @@
 # Node-RED Flow for adding Double-Click function to a switch.
 
-This Node-RED flow was developed to control a CCT or RGB light strip. The proposal was to change the led strip between warm and cool white with the same button I use to turn it On/Off. 
+This Node-RED flow was developed to control a CCT or RGB light strip. So I can change the led strip between warm and cool white with the same button I use to turn it On/Off. 
 
 The goal is to make the LED strip toggle between On/Off and switch between warm and cool white based on the number of clicks.
 
