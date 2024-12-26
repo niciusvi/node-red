@@ -1,4 +1,4 @@
-# Node-RED Flow for Heater Control
+# Node-RED Flow to send a notification of how much time was spend in the shower
 
 ## Information about the Node-RED Flow
 
