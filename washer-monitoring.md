@@ -1,5 +1,4 @@
-# Node-RED Flow to send a notification to Alexa when the Dishwasher or Washing Machine finish the cycle so you can open the door
-
+# Node-RED Flow to send a notification to Alexa when the Dishwasher or Washing Machine finish the cycle
 This project implements automation to monitor dishwasher usage using Node-RED, Home Assistant, and integration with Alexa devices. It controls the dishwasher's state, notifies when the cycle is complete, and checks conditions such as motion in the kitchen to stop the notifications.
 
 ## Flow
